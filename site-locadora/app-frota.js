@@ -1,23 +1,27 @@
-function fnCarregarReserva(frota){
-    document.getElementById("id").innerHTML = frota.id
-    document.getElementById("marca").innerHTML = frota.marca
-    document.getElementById("modelo").innerHTML = frota.modelo
-    document.getElementById("placa").innerHTML = frota.placa
-    document.getElementById("categoria").innerHTML = frota.categoria
-    document.getElementById("valorDiaria").innerHTML = frota.valorDiaria.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+function fnCarregarVeiculos(veiculo) {
+    let linha = `
+                            <tr>
+                                <td>${veiculo.id}</td>
+                                <td>${veiculo.marca}</td>
+                                <td>${veiculo.modelo}</td>
+                                <td>${veiculo.placa}</td>
+                                <td>${veiculo.categoria}</td>
+                                <td>${veiculo.valor_diaria.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}</td>
+                                <td>
+                                
+                            </tr>
+    `
 
+    document.querySelector("#lista-veiculos").innerHTML += linha
 }
 
 function fnCarregarDados() {
- 
-    const parametros = new URLSearchParams(window.location.search)
-    const id = parametros.get('id') + "/"
-        fetch('http://localhost:3000/reservas/' + id, { method: 'GET'})
- 
+    fetch('http://localhost:3000/veiculos', { method: 'GET' })
+
         .then(resposta => resposta.json())
-        .then((reservas) => {
-            reservas.forEach(frota => {
-                fnCarregarReserva(frota)
+        .then((veiculos) => {
+            veiculos.forEach(veiculo => {
+                fnCarregarVeiculos(veiculo)
             });
         })
         .catch(erro => console.log(erro.message))

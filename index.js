@@ -29,7 +29,7 @@ conexao.connect(function (erro) {
 })
 
 //RESERVA DE VEICULO
-app.post("/reservas", function (req, res) {
+app.post("/reserva_cliente", function (req, res) {
     const data = req.body
     conexao.query('INSERT INTO agendamentos set?', [data],
         function (erro, resultado) {
@@ -41,7 +41,7 @@ app.post("/reservas", function (req, res) {
 })
 
 // Read All - [GET] /RESERVAS
-app.get("/reservas", function (req, res) {
+app.get("/reserva_cliente", function (req, res) {
     conexao.query("SELECT * FROM agendamentos", function (erro, lista_reservas, campos) {
         console.log(lista_reservas);
         res.send(lista_reservas)
@@ -60,4 +60,36 @@ app.post("/cad-veiculo", function (req, res) {
         });
 })
 
+// Read All - [GET] /VEICULOS
+app.get("/veiculos", function (req, res) {
+    conexao.query("SELECT * FROM veiculos", function (erro, dados) {
+        if (erro) {
+            return res.status(500).json({ erro: "Erro ao buscar veículos" })
+        }
+        res.json(dados)
+    })
+})
+
+// Delete - [DELETE] /RESERVA/:id
+app.delete("/reserva_cliente/:id", function(req, res) {
+    const id = req.params.id
+    conexao.query(`DELETE FROM agendamentos where id = ${id}`, function (erro, resultado){
+        if (erro) {
+            res.send(erro)
+        }
+        res.send({ "status": 200, "message": "Reserva excluida com sucesso!"})
+    })
+})
+
+// Update - [PUT] /RESERVA/:id
+app.put("/reserva_cliente/:id", function (req, res) {
+    const id = req.params.id
+    const data = req.body
+    conexao.query(`UPDATE agendamentos set ? where id = ${id}`, [data], function (erro, resultado) {
+        if (erro) {
+            res.send(erro)
+        }
+        res.send({ "status": 200, "message": "Reserva atualizada com sucesso!" })
+    })
+})
 app.listen(3000)

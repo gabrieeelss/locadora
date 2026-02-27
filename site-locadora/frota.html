@@ -11,31 +11,14 @@
 <body class="bg-light">
 
     <!-- HEADER -->
-    <section class="bg-dark text-white py-5 text-center">
+    <section class="bg-warning text-white py-5 text-center">
         <div class="container">
             <h1 class="fw-bold">Nossa Frota</h1>
         </div>
     </section>
 
-    <!-- CONTEÚDO -->
     <div class="container my-5">
 
-        <!-- FILTRO -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <select id="filtroCategoria" class="form-select">
-                    <option value="">Todas as Categorias</option>
-                    <option value="basico">Básico</option>
-                    <option value="familia">Família</option>
-                    <option value="luxo">Luxo</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- GRID DE VEÍCULOS -->
-        <div class="row" id="listaVeiculos">
-            <!-- Cards inseridos via JS -->
-        </div>
                         <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -46,7 +29,7 @@
                                 <th scope="col">PLACA</th>
                                 <th scope="col">CATEGORIA</th>
                                 <th scope="col">VALOR DA DIARIA</th>
-                                <th scope="col">AÇÕES</th>
+                                <!-- <th scope="col">AÇÕES</th> -->
                             </tr>
                         </thead>
                         <tbody id="lista-veiculos"></tbody>

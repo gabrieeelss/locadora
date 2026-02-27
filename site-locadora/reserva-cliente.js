@@ -11,7 +11,7 @@ function fnFazerReserva() {
     }
     console.dir(formReserva)
 
-    fetch('http://localhost:3000/reservas/', {
+    fetch('http://localhost:3000/reserva_cliente/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formReserva)
