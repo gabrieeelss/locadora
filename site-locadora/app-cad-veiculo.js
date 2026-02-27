@@ -22,7 +22,7 @@ function fnCadastrarVeiculo() {
         .then((dados) => {
             fnLimparCampos()
             console.log(dados)
-            console.log("Veículo cadastrado com sucesso!")
+            alert("Veículo cadastrado com sucesso!")
         })
         .catch(erro => console.log(erro.message))
 }

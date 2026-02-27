@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Frota de Veículos</title>
@@ -8,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+
 <body class="bg-light">
 
     <!-- HEADER -->
@@ -15,30 +17,47 @@
         <div class="container">
             <h1 class="fw-bold">Nossa Frota</h1>
         </div>
+        <ul class="nav nav-tabs justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="reservas.html">Reservas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="frota.html">Frota</a>
+  </li>
+    <li class="nav-item">
+    <a class="nav-link" href="cad-veiculo.html">Cadastrar Veículo</a>
+  </li>
+</ul>
     </section>
+    <div class="d-grid gap-2 col-6 mx-auto">
 
+    </div>
     <div class="container my-5">
 
-                        <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">MARCA</th>
-                                <th scope="col">MODELO</th>
-                                <th scope="col">PLACA</th>
-                                <th scope="col">CATEGORIA</th>
-                                <th scope="col">VALOR DA DIARIA</th>
-                                <!-- <th scope="col">AÇÕES</th> -->
-                            </tr>
-                        </thead>
-                        <tbody id="lista-veiculos"></tbody>
-                    </table>
-                </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">MARCA</th>
+                        <th scope="col">MODELO</th>
+                        <th scope="col">PLACA</th>
+                        <th scope="col">CATEGORIA</th>
+                        <th scope="col">VALOR DA DIARIA</th>
+                        <!-- <th scope="col">AÇÕES</th> -->
+                    </tr>
+                </thead>
+                <tbody id="lista-veiculos"></tbody>
+            </table>
+        </div>
 
     </div>
 
     <script src="app-frota.js"></script>
 
 </body>
+
 </html>
