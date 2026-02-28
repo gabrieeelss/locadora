@@ -9,6 +9,7 @@ function fnFazerReserva() {
         email_cliente: document.getElementById("email").value,
         categoria: document.getElementById("categoria").value,
     }
+    
     console.dir(formReserva)
 
     fetch('http://localhost:3000/reserva_cliente/', {
@@ -18,7 +19,7 @@ function fnFazerReserva() {
     })
         .then(resposta => resposta.json())
         .then((dados) => {
-            console.log("Reserva Feita com Sucesso!")
+            alert("Reserva Feita com Sucesso!")
             fnLimparCampos()
             console.log(dados)
         })
@@ -32,3 +33,4 @@ btn_salvar.addEventListener("click", function () {
     fnFazerReserva()
     console.log()
 })
+

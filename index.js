@@ -71,25 +71,32 @@ app.get("/veiculos", function (req, res) {
 })
 
 // Delete - [DELETE] /RESERVA/:id
-app.delete("/reserva_cliente/:id", function(req, res) {
+app.delete("/reserva_cliente/:id", function (req, res) {
     const id = req.params.id
-    conexao.query(`DELETE FROM agendamentos where id = ${id}`, function (erro, resultado){
+    conexao.query(`DELETE FROM agendamentos where id = ${id}`, function (erro, resultado) {
         if (erro) {
             res.send(erro)
         }
-        res.send({ "status": 200, "message": "Reserva excluida com sucesso!"})
+        res.send({ "status": 200, "message": "Reserva excluida com sucesso!" })
     })
 })
 
-// Update - [PUT] /RESERVA/:id
-app.put("/reserva_cliente/:id", function (req, res) {
-    const id = req.params.id
-    const data = req.body
-    conexao.query(`UPDATE agendamentos set ? where id = ${id}`, [data], function (erro, resultado) {
+// LOGIN
+app.post("/login/", function (req, res) {
+    const usuario = req.body.usuario
+    const senha = req.body.senha
+    conexao.query(`select * from usuarios where usuario = '${usuario}' and senha = 
+'${senha}'`, function (erro, resultado, campos) {
         if (erro) {
             res.send(erro)
+        } else {
+            if (resultado.length > 0) {
+                res.sendStatus(200)
+            } else {
+                res.sendStatus(401)
+            }
         }
-        res.send({ "status": 200, "message": "Reserva atualizada com sucesso!" })
     })
 })
+
 app.listen(3000)
