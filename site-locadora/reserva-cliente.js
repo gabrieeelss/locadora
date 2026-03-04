@@ -7,7 +7,7 @@ function fnFazerReserva() {
     let formReserva = {
         nome_cliente: document.getElementById("nome").value.trim(),
         email_cliente: document.getElementById("email").value.trim(),
-        categoria: document.getElementById("categoria").value,
+        categoria: document.getElementById("veiculo_id").value,
     }
 
     // VALIDAÇÃO

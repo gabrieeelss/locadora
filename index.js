@@ -30,23 +30,63 @@ conexao.connect(function (erro) {
 
 //RESERVA DE VEICULO
 app.post("/reserva_cliente", function (req, res) {
-    const data = req.body
-    conexao.query('INSERT INTO agendamentos set?', [data],
-        function (erro, resultado) {
-            if (erro) {
-                res.json(erro);
-            }
-            res.send(resultado.insertId);
-        });
-})
+
+    const { nome_cliente, email_cliente, categoria } = req.body;
+    const sqlVeiculo = "SELECT id FROM veiculos WHERE categoria = ? LIMIT 1";
+    conexao.query(sqlVeiculo, [categoria], function (erro, resultado) {
+
+        if (erro) {
+            res.json(erro);
+            return;
+        }
+        if (resultado.length === 0) {
+            res.json({ mensagem: "Nenhum veículo disponível nessa categoria" });
+            return;
+        }
+        const veiculo_id = resultado[0].id;
+        const reserva = {
+            nome_cliente: nome_cliente,
+            email_cliente: email_cliente,
+            veiculo_id: veiculo_id
+        };
+        conexao.query("INSERT INTO agendamentos SET ?", reserva,
+            function (erro2, resultado2) {
+
+                if (erro2) {
+                    res.json(erro2);
+                } else {
+                    res.json({ id_reserva: resultado2.insertId });
+                }
+
+            });
+
+    });
+
+});
 
 // Read All - [GET] /RESERVAS
 app.get("/reserva_cliente", function (req, res) {
-    conexao.query("SELECT * FROM agendamentos", function (erro, lista_reservas, campos) {
-        console.log(lista_reservas);
-        res.send(lista_reservas)
-    })
-})
+
+    const sql = `
+    SELECT
+    agendamentos.id,
+    agendamentos.nome_cliente,
+    agendamentos.email_cliente,
+    agendamentos.data_reserva,
+    veiculos.categoria,
+    veiculos.modelo
+    FROM agendamentos
+    JOIN veiculos
+    ON agendamentos.veiculo_id = veiculos.id
+    `;
+    conexao.query(sql, function (erro, lista_reservas, campos) {
+        if (erro) {
+            res.json(erro);
+        } else {
+            res.json(lista_reservas);
+        }
+    });
+});
 
 // CADASTRO DE VEICULO
 app.post("/cad-veiculo", function (req, res) {

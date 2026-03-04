@@ -5,6 +5,7 @@ function fnCarregarReservas(reserva) {
                                 <td>${reserva.nome_cliente}</td>
                                 <td>${reserva.email_cliente}</td>
                                 <td>${reserva.categoria}</td>
+                                <td>${reserva.modelo}</td>
                                 <td>${reserva.data_reserva}</td>
                                 <td>
                                 <button type="button" class="btn" onclick="fnExcluirReserva(${reserva.id}, event.target)" title="Excluir">❌</button>

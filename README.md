@@ -3,21 +3,35 @@
 
 DATABASE:
 CREATE TABLE veiculos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     modelo VARCHAR(100) NOT NULL,
     marca VARCHAR(100) NOT NULL,
     placa VARCHAR(10) NOT NULL UNIQUE,
-    categoria VARCHAR(50) NOT NULL,
+    categoria VARCHAR(20) NOT NULL,
     valor_diaria DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE agendamentos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nome_cliente VARCHAR(100) NOT NULL,
     email_cliente VARCHAR(100) NOT NULL,
     veiculo_id INT NOT NULL,
-    data_reserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_reserva TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_veiculo
+        FOREIGN KEY (veiculo_id)
+        REFERENCES veiculos(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    nivel_acesso ENUM('Admin','Operador') NOT NULL
+);
+
 
 INSERT INTO veiculos (modelo, marca, placa, categoria, valor_diaria)
 VALUES 
