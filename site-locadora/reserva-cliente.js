@@ -5,9 +5,15 @@ function fnLimparCampos() {
 function fnFazerReserva() {
 
     let formReserva = {
-        nome_cliente: document.getElementById("nome").value,
-        email_cliente: document.getElementById("email").value,
+        nome_cliente: document.getElementById("nome").value.trim(),
+        email_cliente: document.getElementById("email").value.trim(),
         categoria: document.getElementById("categoria").value,
+    }
+
+    // VALIDAÇÃO
+    if (!formReserva.nome_cliente || !formReserva.email_cliente) {
+        alert("Nome e E-mail são obrigatórios!")
+        return;
     }
     
     console.dir(formReserva)
