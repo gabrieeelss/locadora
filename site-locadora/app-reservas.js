@@ -16,7 +16,7 @@ function fnCarregarReservas(reserva) {
 }
 
 function fnCarregarDados() {
-    fetch('http://localhost:3000/reserva_cliente', { method: 'GET' })
+    fetch('http://localhost:3000/reserva_cliente', { method: 'GET', credentials: 'include' })
 
         .then(resposta => resposta.json())
         .then((reservas) => {

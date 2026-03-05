@@ -1,7 +1,7 @@
 function fnFazerLogin() {
 let formDados = {
-usuario: document.getElementById("_________").value,
-senha: document.getElementById("_________").value
+login: document.getElementById("login").value,
+senha: document.getElementById("senha").value
 }
 fetch('http://localhost:3000/login/', {
 method: 'POST',
@@ -11,9 +11,19 @@ headers: {
 body: JSON.stringify(formDados)
 })
 .then(resposta => resposta.status)
-.then((dados) => {
-fnLimparCampos()
-console.log(dados)
+.then((status) => {
+    if(status == 200){
+        window.location.href = "reservas.html"
+    }else{
+        alert("Login inválido")
+    }
+
 })
 .catch(erro => console.log(erro.message))
 }
+
+let btn_login = document.getElementById("btn-login")
+
+btn_login.addEventListener("click", function () {
+    fnFazerLogin()
+})
