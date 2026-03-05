@@ -3,12 +3,13 @@ let formDados = {
 login: document.getElementById("login").value,
 senha: document.getElementById("senha").value
 }
-fetch('http://localhost:3000/login/', {
+fetch('http://127.0.0.1:3000/login/', {
 method: 'POST',
 headers: {
 'Content-Type': 'application/json',
 },
-body: JSON.stringify(formDados)
+body: JSON.stringify(formDados),
+credentials: 'include'
 })
 .then(resposta => resposta.status)
 .then((status) => {

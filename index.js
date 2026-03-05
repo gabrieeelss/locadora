@@ -1,5 +1,6 @@
 const express = require('express')
 const session = require("express-session")
+const cors = require('cors')
 
 const app = express()
 
@@ -9,15 +10,20 @@ app.use(express.urlencoded({ extended: true}))
 app.use(session({
     secret: "locadora",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // em dev sem HTTPS
+        httpOnly: true,
+        sameSite: 'none'
+    }
 }))
 
-// necessário para permitir requisições de diferentes origens(dominios/servidores)
-const cors = require('cors')
-app.use(cors())
+app.use(cors({
+  origin: 'http://127.0.0.1:5500', // origem do front-end
+  credentials: true                // permite cookies/sessão
+}))
 
 app.get('/', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*')
     res.send('Locadora')
 })
 
@@ -161,7 +167,7 @@ function verificarLogin(req,res, next){
     if (req.session.usuario) {
         next()
     } else {
-        res.status(401).send("Não autorizado")
+        res.status(401).json({ erro: "Não autorizado"})
     }
 }
 

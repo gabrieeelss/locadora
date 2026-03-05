@@ -16,15 +16,30 @@ function fnCarregarReservas(reserva) {
 }
 
 function fnCarregarDados() {
-    fetch('http://localhost:3000/reserva_cliente', { method: 'GET', credentials: 'include' })
+    fetch('http://127.0.0.1:3000/reserva_cliente', { method: 'GET', credentials: 'include' })
 
-        .then(resposta => resposta.json())
-        .then((reservas) => {
-            reservas.forEach(reserva => {
-                fnCarregarReservas(reserva)
-            });
+        .then(resposta => {
+            if (!resposta.ok) {
+                return resposta.json().then(err => {
+                throw new Error(err.erro || "Erro " + resposta.status)
+                })
+            }
+            return resposta.json()
+        })
+        .then(reservas => {
+            if (Array.isArray(reservas)) {
+            reservas.forEach(fnCarregarReservas)
+            }else{
+                console.log("Falha ao carregar reservas:", reservas)
+            }
         })
         .catch(erro => console.log(erro.message))
 }
 
 fnCarregarDados()
+
+
+
+
+
+
